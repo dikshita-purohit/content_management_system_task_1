@@ -1,0 +1,42 @@
+{% load static from static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Articles</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<style>
+	h1{
+		color:white;
+	}
+</style>
+<body>
+
+	<div class="" style="background-color: white; color: black">
+		<header style="background-image:radial-gradient(rgb(59, 2, 74),rgb(63, 11, 76),rgb(47, 4, 40));">
+			<h1><a href="{% url 'home' %}">Content Management System</a></h1>
+			<nav>
+				{% if user.is_authenticated %}
+				<ul>
+					<li>
+						<form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+							{% csrf_token %}
+
+							<button type="submit" style="margin-right:1m;">Logout</button>
+						</form>
+					</li>
+					<li><a href="{% url 'articles:create' %}" class="highlight" style="margin-right:3.3cm; "> Create New Article</a></li>
+				
+					{% else %}
+						<li><a href="{% url 'accounts:login' %}" class="button" style="margin-right:20px;">Login</a></li>
+						<li><a href="{% url 'accounts:signup' %}" class="button" style=margin-right:30px;">Sign Up</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</header>
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+</html>
