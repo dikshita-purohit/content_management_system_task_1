@@ -1,0 +1,53 @@
+{%extends 'base_layout.html'%}
+	{% block content %}
+	<style>
+		h1{
+			color:rgb(59, 2, 74);
+			font-size:50px;
+			margin-left:30px;
+			margin-top:10px;
+		}
+		.articles{
+			font-size:20px;
+			margin-left:60px;
+			display:grid;
+			grid-template-columns: 1fr;
+			grid-gap: 30px;
+			margin-top:30px;
+			margin-right:60px;
+			
+			
+			
+		}
+		p{
+			margin-left:20px;
+		}
+		.article{
+			border: 1px solid rgb(59, 2, 74);
+			position:relative;
+		}
+		.auth{
+			margin-right:20px;
+			background-color:red;
+			color:white;
+			padding: 10px;
+			background: rgb(59, 2, 74);
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			border-radius:20px;
+		}
+	</style>
+	
+		<h1>Articles</h1>
+		<div class="articles">
+			{% for article in articles %}
+				<div class="article">
+					<h2><a href="{% url 'articles:detail' slug=article.slug %}">{{article.title}}</a></h2>
+					<p style="color:red">{{article.snippet}}</p>
+					<p>{{article.date}}</p>
+					<p class="auth">added by {{article.auth.username}}</p>
+				</div>
+			{% endfor %}
+		</div>
+	{% endblock %}
